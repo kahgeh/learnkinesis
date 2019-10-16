@@ -12,3 +12,5 @@ $iterator = aws kinesis get-shard-iterator --stream-name kg-test --shard-iterato
 ## Read
 
 $streamData = aws kinesis get-records --shard-iterator $iterator.ShardIterator --limit 10 | ConvertFrom-Json
+
+$streamData.Records|%{ConvertFrom-Base64 $_.Data} 
